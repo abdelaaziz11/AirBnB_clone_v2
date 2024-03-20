@@ -1,15 +1,15 @@
 #!/usr/bin/python3
 """This module defines a class User"""
-from models.base_model import BaseModel, Base
+from models.base_model import BaseModel
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 import os
 
-STORAGE = os.getenv("HBNB_TYPE_STORAGE")
+# STORAGE = os.getenv("HBNB_TYPE_STORAGE")
 
 
-class User(BaseModel, Base):
-    """This class defines a user by various attributes"""
+class User(BaseModel):
+    """This class defines a user by various attributes
 
     __tablename__ = "users"
     if STORAGE == "db":
@@ -25,8 +25,8 @@ class User(BaseModel, Base):
                             delete-orphan",
             backref="place",
         )
-    else:
-        email = ""
-        password = ""
-        first_name = ""
-        last_name = ""
+    else:"""
+    email = ""
+    password = ""
+    first_name = ""
+    last_name = ""
