@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """This module defines a base class for all models in our hbnb clone"""
-from uuid import uuid4
+import uuid
 from datetime import datetime
 
 
@@ -20,7 +20,8 @@ class BaseModel:
                 if key == "created_at" or key == "updated_at":
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 if key != "__class__":
-                    setattr(self, key, value)
+                    setattr(self, key, value
+
     def __str__(self):
         """Returns a string representation of the instance"""
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]

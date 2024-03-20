@@ -111,7 +111,7 @@ class HBNBCommand(cmd.Cmd):
             if kwargs == {}:
                 new_instance = eval(class_name)()
             else:
-                new_instance = eval(class_name)(*kwargs)
+                new_instance = eval(class_name)(**kwargs)
             storage.new(new_instance)
             print(new_instance.id)
             storage.save()
