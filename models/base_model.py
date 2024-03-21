@@ -15,7 +15,6 @@ class BaseModel:
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
 
-
     def __init__(self, *args, **kwargs):
         """Initialize a new BaseModel.
 
@@ -23,6 +22,7 @@ class BaseModel:
             *args (any): Unused.
             **kwargs (dict): Key/value pairs of attributes.
         """
+
         self.id = str(uuid4())
         self.created_at = self.updated_at = datetime.utcnow()
         if kwargs:
@@ -31,6 +31,7 @@ class BaseModel:
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 if key != "__class__":
                     setattr(self, key, value)
+
     def __str__(self):
         """Returns a string representation of the instance"""
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]
@@ -51,11 +52,12 @@ class BaseModel:
                           (str(type(self)).split('.')[-1]).split('\'')[0]})
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
-        if "_sa_instance_state" in dictionary.keys():
-            del dictionary["_sa_instance_state"]
+        dictionary.pop("_sa_instance_state", None)
+        """if '_sa_instance_state' in dictionary.keys():
+            del dictionary['_sa_instance_state']"""
         return dictionary
+
     def delete(self):
         """Attribute that delete insatnce"""
         from models import storage
-
         storage.delete(self)
