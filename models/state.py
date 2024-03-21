@@ -19,14 +19,3 @@ class State(BaseModel, Base):
                             cascade="all, delete-orphan")
     else:
         name = ""
-
-        @property
-        def cities(self):
-            """Returns the cities"""
-            from models import storage
-
-            city_list = []
-            for key, value in storage.all(City).items():
-                if self.id == value.state_id:
-                    city_list.append(value)
-            return city_list

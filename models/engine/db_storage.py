@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+file db data base storage bd_storage
+"""
+
 import os
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import create_engine
