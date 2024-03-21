@@ -5,11 +5,11 @@ from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 import os
 
-# STORAGE = os.getenv("HBNB_TYPE_STORAGE")
+STORAGE = os.getenv("HBNB_TYPE_STORAGE")
 
 
 class User(BaseModel):
-    """This class defines a user by various attributes
+    """This class defines a user by various attributes"""
 
     __tablename__ = "users"
     if STORAGE == "db":
@@ -25,8 +25,8 @@ class User(BaseModel):
                             delete-orphan",
             backref="place",
         )
-    else:"""
-    email = ""
-    password = ""
-    first_name = ""
-    last_name = ""
+    else:
+        email = ""
+        password = ""
+        first_name = ""
+        last_name = ""
