@@ -1,32 +1,35 @@
 #!/usr/bin/env bash
-# Bash script that sets up your web servers for the deployment of web_static
-sudo apt update
-sudo apt -y install nginx
 
+# Install Nginx if not already installed
+if ! [ -x "$(command -v nginx)" ]; then
+    sudo apt update
+    sudo apt -y install nginx
+fi
+
+# Create necessary directories
 sudo mkdir -p /data/web_static/releases/test/
 sudo mkdir -p /data/web_static/shared/
 
+# Create fake HTML file
+echo "<html>
+  <head>
+  </head>
+  <body>
+    Holberton School
+  </body>
+</html>" | sudo tee /data/web_static/releases/test/index.html
 
-
-echo "Holberton School" > /data/web_static/releases/test/index.html
-
+# Create or update symbolic link
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
+
+# Set ownership recursively
 sudo chown -R ubuntu:ubuntu /data/
 
-# Update Nginx configuration to serve /data/web_static/current/ at /hbnb_static
-echo "server {
-    listen 80;
-    server_name _;
-         root /var/www/html;
-    index  index.html index.htm;
+# Update Nginx configuration
+sudo sed -i '/server_name _;/a \ \n\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n' /etc/nginx/sites-available/default
 
-    location /hbnb_static {
-        alias /data/web_static/current;
-    }
-    location / {
-        # Your other configuration directives, if any
-    }
-}" > /etc/nginx/sites-available/default
-
-# sudo nginx -t
+# Restart Nginx
 sudo service nginx restart
+
+exit 0
+
