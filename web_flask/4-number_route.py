@@ -27,9 +27,8 @@ def python_text(text='is cool'):
 
 
 @app.route('/number/<n>', strict_slashes=False)
-def number(n):
-    if isinstance(n, int):
-        return n + ' is a number'
+def intNumber(n):
+    return ("{:d} is a number".format(n))
 
 
 if __name__ == "__main__":
