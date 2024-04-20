@@ -31,5 +31,9 @@ def intNumber(n):
     return ("{:d} is a number".format(n))
 
 
+@app.route('/number_template/<n>', strict_slashes=False)
+def numberTemplate():
+    return <BODY><H1>'Number:  {:d}'.format(n)</H1><BODY>
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port='5000')
