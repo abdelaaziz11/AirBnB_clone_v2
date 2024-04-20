@@ -33,7 +33,7 @@ def intNumber(n):
 
 @app.route('/number_template/<n>', strict_slashes=False)
 def numberTemplate(n):
-    return ("Number:  {:d}".format(n))
+    return render_template('5-number.html', n=n)
 
 
 if __name__ == "__main__":
