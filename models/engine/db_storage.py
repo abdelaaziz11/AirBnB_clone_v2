@@ -3,6 +3,8 @@
 file db data base storage bd_storage
 """
 
+import sqlalchemy
+import models
 import os
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import create_engine
@@ -77,6 +79,8 @@ class DBStorage:
         self.__session = scoped_session(Session)
 
     def close(self):
-        """A method that call remove() method on the private
-        session attribute (self.__session)"""
+        """
+        A method that call remove() method on the private
+        session attribute (self.__session)
+        """
         self.__session.remove()
